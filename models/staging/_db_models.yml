@@ -1,0 +1,14 @@
+version: 2
+
+models: 
+  - name: stg_customers
+    column:
+      - name: customer_id
+        data_test:
+         - not_null
+         - unique
+        name: company_name
+        data_test:
+         - not_null
+
+        
