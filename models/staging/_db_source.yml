@@ -1,9 +1,0 @@
-version: 2
-
-source:
-  - name: northwind_ne7m_user
-    database: northwind_ne7m
-    schema: public
-    tables:
-        name: customers
-        name: orders
