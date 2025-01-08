@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: northwind_ne7m
+    database: northwind_ne7m
+    schema: public
+    tables: 
+
+      - name: customers
+      - name: order_details
+
+      - name: orders
+
+      - name: products

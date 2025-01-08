@@ -7,7 +7,7 @@ with int_orders_details_select_columns as (
      cast(discount as decimal) discount,
      cast(sum(unit_price * quantity * (1-discount))as decimal) as total_sales
     from 
-    {{ ref("stg_orders_details")}}
+    {{ ref("stg_order_details")}}
     group by
     order_id,
     product_id,

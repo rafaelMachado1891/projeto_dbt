@@ -1,0 +1,1 @@
+select * from {{ source('northwind_ne7m', 'order_details') }}

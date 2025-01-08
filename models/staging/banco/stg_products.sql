@@ -1,1 +1,1 @@
-select * from products
+select * from {{ source('northwind_ne7m', 'products') }}

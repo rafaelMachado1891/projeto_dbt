@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: stg_customers
+    column: 
+      - name: customer_id
+        data_test: 
+          - not_null
+          - unique
+      - name: company_name
+        data_test:
+          - not_null
+      - name: country
+
+  - name: stg_order_details
+    column: 
+      - name: order_id
+        data_test:
+          - not_null
+      - name: product_id
+        data_test:
+          - not_null
+      - name: unit_price
+        data_test: 
+          - not_null
+      - name: quantity
+        data_test:
+          - not_null
+      - name: discount
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_test:
+          - not_null
+          - unique
+      - name: customer_id
+        data_test: 
+          - not_null
+      - name: employee_id
+        data_test:
+          - not_null
+      - name: order_date
+        data_test:
+          - not_null
+  - name: stg_ptoducts
+    columns:
+      - name: product_id
+        data_test:
+          - not_null
+          - unique
+      - name: product_name
+        data_test:
+          - not_null
+          
+        
+        
