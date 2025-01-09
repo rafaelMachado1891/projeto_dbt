@@ -1,28 +1,16 @@
-with customers_uk as (
-    select 
-        a.order_id,
-        a.customer_id,
-        b.company_name,
-        b.country
-    from {{ ref('int_orders') }} a 
-    join 
-    {{ ref("int_customers") }} b 
-    on a.customer_id = b.customer_id
-    where
-    b.country = 'UK'
-),
-sales_by_customers as (
+with sales_by_customers_Uk as (
     select
-     b.company_name,
-     round(sum(a.total_sales),2) as total_sales
-    from {{ref('int_order_details')}} a
-    join
-    customers_uk b 
-    on b.order_id = a.order_id
+     company_name,
+     round(sum(total_sales),2) as total_sales
+    from {{ref('int_order_details')}}
+    where
+    country = 'UK'
     group by 
-    b.company_name
+    company_name
     having
-    sum(a.total_sales) > 1000
+    sum(total_sales) > 1000
+    order by
+    total_sales DESC
 )
 
-select * from sales_by_customers
+select * from sales_by_customers_Uk
