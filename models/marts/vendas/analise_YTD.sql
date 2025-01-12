@@ -1,9 +1,37 @@
-WITH RECEITA_TOTAL AS (
+WITH order_details as (
+    select 
+      order_id,
+      total_sales
+    from {{ ref('int_order_details') }}
+
+),
+
+orders as (
+    select 
+     order_id,
+     order_date
+    from {{ ref('int_orders') }}
+),
+
+agregate_orders_by_order_detals as (
+    select
+     o.order_id,
+     o.order_date,
+     sum(od.total_sales) total_sales
+    from orders o
+    join order_details od
+    on o.order_id = od.order_id
+    group by 
+    o.order_id,
+    o.order_date
+),
+
+RECEITA_TOTAL AS (
 SELECT
 	 EXTRACT(YEAR FROM a.ORDER_DATE) AS ANO
 	,EXTRACT(MONTH FROM a.ORDER_DATE) AS MES
-	,SUM((A.UNIT_PRICE * A.QUANTITY) * (1- A.DISCOUNT)) AS TOTAL    
-FROM {{ ref("int_order_details") }} A 
+	,SUM(total_sales) AS TOTAL    
+FROM agregate_orders_by_order_detals a 
 GROUP BY 
     EXTRACT(YEAR FROM a.ORDER_DATE),
     EXTRACT(MONTH FROM a.ORDER_DATE)
