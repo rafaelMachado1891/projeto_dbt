@@ -1,16 +1,17 @@
 version: 2
 
 models:
-  - name: stg_customers
+  - name: stg_customers # Nome do modelo 
     column: 
-      - name: customer_id
+      - name: customer_id # Nome da coluna
+        description: 'id único da coluna'
         data_test: 
-          - not_null
-          - unique
-      - name: company_name
+          - not_null # Teste na coluna para garantir que não haja valores nulos
+          - unique # Teste para garantir valores unicos
+      - name: company_name # Nome da coluna
         data_test:
-          - not_null
-      - name: country
+          - not_null # Teste para garantir que não haja valores nulos
+      - name: country # Nome da coluna 
 
   - name: stg_order_details
     column: 
