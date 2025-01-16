@@ -5,10 +5,12 @@ models:
     column: 
       - name: customer_id # Nome da coluna
         description:  'identificador unico do cliente'
+        type: 'string (50)'
         data_test: 
           - not_null # Teste na coluna para garantir que não haja valores nulos
           - unique # Teste para garantir valores únicos
       - name: company_name # Nome da coluna
+      - type: 'string (40)'
         data_test:
           - not_null # Teste para garantir que não haja valores nulos
       - name: country # Nome da coluna 
