@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: int_customers # nome do modelo
+    column:
+      - name:  customer_id # nome da couluna
+        description: # identificador unico do cliente
+
+      - name: company_name # nome da coluna
+        description: # razão social do cliente
+
+      - name: country # nome da coluna
+        description: # região do cliente
+
+  - name: int_orders_details # nome do modelo
+    column:
+      - name: order_id # nome da coluna
+        description: # identificador unico do pedido
+
+      - name: product_id # nome da coluna
+        description: # identificador unico do produto
+
+      - name: unit_price # nome da coluna
+        description: # valor unitário do produto valor expresso em $
+
+      - name: quantity # nome da coluna
+        description: # quantidade vendida
+
+      - name: discount # nome da coluna
+        description: # desconto aplicado na venda valor expresso em % 
+      
+      - name: total_sales # nome da coluna
+        description: # coluna calculado representando o total da venda
+  - name: int_orders # nome do modelo
+    column: 
+      - name: order_id # nome da coluna
+        description: # coluna com o identificador unico da ordem
+      
+      - name: customer_id # nome da coluna
+        description: # identificador unico do cliente
+
+      - name: employee_id # nome da coluna
+        description: # identificado unico do vendedor
+
+      - name: order_date # nome da coluna 
+        description: # data da venda
+
+  - name: int_products # nome do modelo
+    column: 
+     - name: product_id # nome da coluna
+       description: # identificador unico do produto
+
+     - name: product_name # nome da coluna
+       description: # nome do produto
+
+     - name: category_id # nome da coluna
+       description: # identificador unico da categoria
+
+

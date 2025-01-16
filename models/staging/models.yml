@@ -4,7 +4,7 @@ models:
   - name: stg_customers # Nome do modelo 
     column: 
       - name: customer_id # Nome da coluna
-        description: 'id único da coluna'
+        description:  'identificador unico do cliente'
         data_test: 
           - not_null # Teste na coluna para garantir que não haja valores nulos
           - unique # Teste para garantir valores únicos
@@ -14,55 +14,56 @@ models:
       - name: country # Nome da coluna 
 
   - name: stg_order_details # nome do modelo
-    description: # contém os detalhes de cada order
+    description: 'contém os detalhes de cada order'
     column: 
       - name: order_id # nome da coluna
-        description: # coluna com a chave única de cada produto
+        description: ' coluna com a chave única de cada produto'
         data_test:
           - not_null # teste para validar valores não nulos
       - name: product_id # nome da coluna
-        description: # coluna com a descrição do produto
+        description: 'coluna com a descrição do produto'
         data_test:
           - not_null # teste para validar valores não nulos
       - name: unit_price # nome da coluna
-        description: # valor unitário do produto
+        description: 'valor unitário do produto'
         data_test: 
           - not_null # teste para validar valores não nulos
       - name: quantity # nome da coluna 
-        description: # quantidade vendida 
+        description: 'quantidade vendida'
         data_test:   
           - not_null # teste para validar valores não nulos
       - name: discount # nome da coluna 
-        description: # deconto aplicado na venda, valores expressos em %
+        description: 'deconto aplicado na venda, valores expressos em %'
+
   - name: stg_orders # nome do modelo
     columns:
       - name: order_id # nome da coluna
-        description:  # contém a identificação unica de cada ordem
+        description: 'contém a identificação unica de cada ordem'
         data_test:
           - not_null # teste para validar valores não nulos
           - unique   # teste para validar valores únicos 
       - name: customer_id # nome da coluna
-        description: # chave estrangeira identificação do cliente
+        description: 'chave estrangeira identificação do cliente'
         data_test: 
           - not_null # teste para validar valores não nulos
       - name: employee_id # nome da coluna
-        description: # chave estrangeira identificação do funcionário
+        description: 'chave estrangeira identificação do funcionário'
         data_test:
           - not_null # teste para validar valores não nulos
       - name: order_date # nome da coluna
-        descrition: # contém a data da venda
+        descrition: 'contém a data da venda'
         data_test:
           - not_null # teste para validar valores não nulos
   - name: stg_ptoducts # nome do modelo
-    description: # modelo referente a tabela "cadastro de produtos".
+    description: 'modelo referente a tabelacadastro de produtos'
     columns:
       - name: product_id # nome da coluna
-        description: # contêm a identificação unica do produto
+        description: 'contêm a identificação unica do produto'
         data_test:
           - not_null # teste para validar valores não nulos
           - unique # teste para validar valores únicos
       - name: product_name # nome da coluna 
-        descrition: # coluna com a descrição do produto
+        descrition: 'coluna com a descrição do produto'
         data_test:
           - not_null # teste para validar valores não nullos
           
