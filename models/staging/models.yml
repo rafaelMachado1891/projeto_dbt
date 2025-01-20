@@ -1,71 +1,73 @@
 version: 2
 
 models:
-  - name: stg_customers # Nome do modelo 
-    column: 
-      - name: customer_id # Nome da coluna
-        description:  'identificador unico do cliente'
-        data_test: 
-          - not_null # Teste na coluna para garantir que não haja valores nulos
-          - unique # Teste para garantir valores únicos
-      - name: company_name # Nome da coluna
-        data_test:
-          - not_null # Teste para garantir que não haja valores nulos
-      - name: country # Nome da coluna 
-
-  - name: stg_order_details # nome do modelo
-    description: 'contém os detalhes de cada order'
-    column: 
-      - name: order_id # nome da coluna
-        description: ' coluna com a chave única de cada produto'
-        data_test:
-          - not_null # teste para validar valores não nulos
-      - name: product_id # nome da coluna
-        description: 'coluna com a descrição do produto'
-        data_test:
-          - not_null # teste para validar valores não nulos
-      - name: unit_price # nome da coluna
-        description: 'valor unitário do produto'
-        data_test: 
-          - not_null # teste para validar valores não nulos
-      - name: quantity # nome da coluna 
-        description: 'quantidade vendida'
-        data_test:   
-          - not_null # teste para validar valores não nulos
-      - name: discount # nome da coluna 
-        description: 'deconto aplicado na venda, valores expressos em %'
-
-  - name: stg_orders # nome do modelo
+  - name: stg_customers
+    description: "Modelo staging para dados de clientes"
     columns:
-      - name: order_id # nome da coluna
-        description: 'contém a identificação unica de cada ordem'
-        data_test:
-          - not_null # teste para validar valores não nulos
-          - unique   # teste para validar valores únicos 
-      - name: customer_id # nome da coluna
-        description: 'chave estrangeira identificação do cliente'
-        data_test: 
-          - not_null # teste para validar valores não nulos
-      - name: employee_id # nome da coluna
-        description: 'chave estrangeira identificação do funcionário'
-        data_test:
-          - not_null # teste para validar valores não nulos
-      - name: order_date # nome da coluna
-        descrition: 'contém a data da venda'
-        data_test:
-          - not_null # teste para validar valores não nulos
-  - name: stg_ptoducts # nome do modelo
-    description: 'modelo referente a tabelacadastro de produtos'
+      - name: customer_id
+        description: "Identificador único do cliente"
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "Nome da empresa do cliente"
+        tests:
+          - not_null
+      - name: country
+        description: "País de origem do cliente"
+
+  - name: stg_order_details
+    description: "Contém os detalhes de cada pedido"
     columns:
-      - name: product_id # nome da coluna
-        description: 'contêm a identificação unica do produto'
-        data_test:
-          - not_null # teste para validar valores não nulos
-          - unique # teste para validar valores únicos
-      - name: product_name # nome da coluna 
-        descrition: 'coluna com a descrição do produto'
-        data_test:
-          - not_null # teste para validar valores não nullos
-          
-        
-        
+      - name: order_id
+        description: "Chave única de cada pedido"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Chave estrangeira com o ID do produto"
+        tests:
+          - not_null
+      - name: unit_price
+        description: "Valor unitário do produto"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Quantidade vendida"
+        tests:
+          - not_null
+      - name: discount
+        description: "Desconto aplicado na venda, valores expressos em porcentagem"
+
+  - name: stg_orders
+    description: "Modelo staging para dados de pedidos"
+    columns:
+      - name: order_id
+        description: "Identificação única de cada pedido"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Chave estrangeira de identificação do cliente"
+        tests:
+          - not_null
+      - name: employee_id
+        description: "Chave estrangeira de identificação do funcionário"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Data do pedido"
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Modelo referente à tabela de cadastro de produtos"
+    columns:
+      - name: product_id
+        description: "Identificação única do produto"
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Descrição do produto"
+        tests:
+          - not_null
