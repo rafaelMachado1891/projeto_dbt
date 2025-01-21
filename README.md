@@ -13,7 +13,7 @@ O projeto foi organizado em camadas de modelagem no dbt, seguindo as melhores pr
    - **Intermediate (INT)**: Camada intermediária onde ocorrem transformações mais complexas e a criação de tabelas de junção.
    - **Marts (MRT)**: Camada final com tabelas e views prontas para consumo por ferramentas de análise e relatórios.
 
-   ![Projeto](pics/pngdbtcore.png)
+   ![Projeto](.pics/pngdbtcore.png)
 
 2. **Transformações e Consultas**:
    - As transformações foram desenvolvidas para atender às necessidades do negócio.
