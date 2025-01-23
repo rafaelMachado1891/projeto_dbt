@@ -31,7 +31,6 @@ O projeto foi organizado em camadas de modelagem no dbt, seguindo as melhores pr
     from 
         {{ ref("int_orders") }}
 ),
-
 order_details as (
     select
         order_id,
@@ -39,7 +38,6 @@ order_details as (
     from 
         {{ ref("int_order_details") }}
 ),
-
 total_sales_1997 as (
     select
         sum(od.total_sales) as total_sales
@@ -52,7 +50,6 @@ total_sales_1997 as (
     where 
         extract(year from o.order_date) = 1997
 )
-
 select 
     total_sales
 from 
