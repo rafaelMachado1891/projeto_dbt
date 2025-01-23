@@ -35,14 +35,12 @@ order_details as (
     select
         order_id,
         total_sales
-    from 
-        {{ ref("int_order_details") }}
+    from {{ ref("int_order_details") }}
 )
 total_sales_1997 as (
     select
         sum(od.total_sales) as total_sales
-    from 
-        order_details od
+    from order_details od
     join 
         orders o
     on 
@@ -52,8 +50,7 @@ total_sales_1997 as (
 )
 select 
     total_sales
-from 
-    total_sales_1997;
+from total_sales_1997;
 ```
 
 
