@@ -52,7 +52,7 @@ total_sales_1997 as (
 select 
     total_sales
 from total_sales_1997;
-
+```
 
 
 
