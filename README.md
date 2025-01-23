@@ -19,6 +19,48 @@ O projeto foi organizado em camadas de modelagem no dbt, seguindo as melhores pr
    - As transformações foram desenvolvidas para atender às necessidades do negócio.
    - As consultas SQL criadas possibilitam responder a questões estratégicas de forma rápida e precisa.
 
+3. **Relatórios**:
+   - Os relatórios foram criados visando responder perguntas de negócios. A disponibilização das consultas foram feitas em fomato de views para facilitar a conexão com ferrametas de visualização de dados.
+
+   - Questão 1: Qual foi o total de receitas para o ano de 1997? 
+
+   ```with orders as (
+    select 
+        order_id,
+        order_date
+    from 
+        {{ ref("int_orders") }}
+),
+
+order_details as (
+    select
+        order_id,
+        total_sales
+    from 
+        {{ ref("int_order_details") }}
+),
+
+total_sales_1997 as (
+    select
+        sum(od.total_sales) as total_sales
+    from 
+        order_details od
+    join 
+        orders o
+    on 
+        od.order_id = o.order_id
+    where 
+        extract(year from o.order_date) = 1997
+)
+
+select 
+    total_sales
+from 
+    total_sales_1997
+```
+
+
+
 ## Ferramentas Utilizadas
 
 - **DBT Core**: Para modelagem, documentação e testes de dados.
