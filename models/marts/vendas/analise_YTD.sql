@@ -26,30 +26,30 @@ agregate_orders_by_order_detals as (
     o.order_date
 ),
 
-RECEITA_TOTAL AS (
-SELECT
-	 EXTRACT(YEAR FROM a.ORDER_DATE) AS ANO
-	,EXTRACT(MONTH FROM a.ORDER_DATE) AS MES
-	,SUM(total_sales) AS TOTAL    
-FROM agregate_orders_by_order_detals a 
-GROUP BY 
-    EXTRACT(YEAR FROM a.ORDER_DATE),
-    EXTRACT(MONTH FROM a.ORDER_DATE)
-    ORDER BY 1,2
-), 
-RECEITASACUMULADAS AS (
-	SELECT 
-        ANO
-        ,MES
-        ,TOTAL
-        ,SUM(TOTAL) OVER (PARTITION BY ANO ORDER BY MES) AS TOTALYTD
-	FROM RECEITA_TOTAL
+revenue_total as (
+select
+	 exctract(year from a.order_date) as ano
+	,exctract(month from a.order_date) as mes
+	,sum(total_sales) AS total    
+from agregate_orders_by_order_detals a 
+group by
+    EXTRACT(year from a.order_date),
+    EXTRACT(month from a.order_date)
+    order by 1,2
+),  
+accumulated_revenue as (
+	select
+         ano
+        ,mes
+        ,total
+        ,sum(total) over (partition by ano order by mes) as totalytd
+	from revenue_total
 )
-SELECT 
-    ANO
-    ,MES
-    ,TOTAL
-    ,TOTAL - LAG(TOTAL) OVER (PARTITION BY ANO ORDER BY MES) AS DIFERENCA_RECEITA
-    ,TOTALYTD
-    ,(TOTAL / (LAG(TOTAL) OVER (PARTITION BY ANO ORDER BY MES))-1) * 100 AS VARIACAO
-FROM RECEITASACUMULADAS
+select
+     ano
+    ,mes
+    ,total
+    ,total - lag(total) over(partition by ano order by mes) as diferenca_receita
+    ,totalytd
+    ,(total / lag(total) over (partition by ano order by mes))-1) * 100 as variacao
+from accumulated_revenue
