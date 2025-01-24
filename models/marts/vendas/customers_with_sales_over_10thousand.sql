@@ -1,4 +1,3 @@
--- Refatoração para maior clareza e eficiência
 
 with customers_UK as (
     select

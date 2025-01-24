@@ -1,4 +1,4 @@
--- Refatoração para maior clareza e padronização
+
 
 with orders as (
     select 
