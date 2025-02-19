@@ -1,17 +1,17 @@
-# Usa a imagem oficial do Python Slim para reduzir o tamanho
-FROM python:3.12.4-slim  
+# Usando uma imagem oficial do Python como base
+FROM python:3.9
 
-# Define o diretório de trabalho como /app
-WORKDIR /app  
+# Definir diretório de trabalho dentro do container
+WORKDIR /app
 
-# Copia todo o conteúdo do projeto para a imagem
-COPY . /app  
+# Copiar arquivos necessários
+COPY requirements.txt .  
+COPY northwind/ /app/northwind/
+COPY dbt_project.yml profile.yml . 
 
-# Instala dependências do dbt
-RUN pip install -r requirements.txt  
+# Instalar dependências
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install dbt-postgres 
 
-# Define a pasta do projeto dbt como diretório de trabalho
-WORKDIR /app/northwind  
-
-# Define o comando para rodar dbt dentro da pasta correta
-CMD ["dbt", "run"]
+# Definir o entrypoint padrão para rodar dbt
+CMD ["dbt", "run", "--profiles-dir", "."]
