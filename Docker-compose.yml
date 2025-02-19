@@ -1,66 +1,42 @@
 
-version: '3'
+version: '3.8'
 
 services:
   db:
-    container_name: db
-    image: postgres:latest
+    image: postgres:13
+    container_name: postgres_dbt
+    restart: always
     environment:
-        POSTGRES_DB: ${DB_NAME_PROD}
-        POSTGRES_USER: ${DB_USER_PROD}
-        POSTGRES_PASSWORD: ${DB_PASS_PROD}
-    volumes:
-      - postgresql_bin:/usr/lib/postgresql
-      - postgresql_data:/var/lib/postgresql/data
-      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
-      - ./files:/files
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: northwind
     ports:
-      - 5432:5432
-    networks:
-      - db
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   pgadmin:
-    container_name: pgadmin
     image: dpage/pgadmin4
+    container_name: pgadmin_dbt
+    restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: postgres
-      PGADMIN_LISTEN_PORT: 5050
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - postgresql_bin:/usr/lib/postgresql
-      - pgadmin_root_prefs:/root/.pgadmin
-      - pgadmin_working_dir:/var/lib/pgadmin
-      - ./files:/files
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - 5050:5050
-    networks:
+      - "5050:80"
+    depends_on:
       - db
 
   dbt:
-    container_name: dbt
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
+    container_name: dbt_runner
     depends_on:
-      - db
-    networks:
       - db
     volumes:
       - .:/app
     environment:
-      DBT_PROFILES_DIR: /app/projeto_dbt
-
-networks:
-  db:
-    driver: bridge
+      DBT_PROFILES_DIR: /app
+    command: ["dbt", "run", "--profiles-dir", "/app"]
 
 volumes:
-  pgadmin_root_prefs:
-    driver: local
-  pgadmin_working_dir:
-    driver: local
-  postgresql_data:
-    driver: local
-  postgresql_bin:
-    driver: local
+  postgres_data:
