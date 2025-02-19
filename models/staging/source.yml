@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: northwind_ne7m
-    database: northwind_ne7m
+  - name: db
+    database: northwind_dbt
     schema: public
     tables: 
 
