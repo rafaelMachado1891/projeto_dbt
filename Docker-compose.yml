@@ -9,23 +9,29 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: dbt
     ports:
-      - "5433:5432"  # Expondo na porta 5433
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql  # Adiciona o script SQL na inicialização
+      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d dbt"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
 
-  dbt:
+  dbt:  # 🔥 Corrigido (agora está dentro de services)
     build: .
     container_name: dbt_runner
     depends_on:
-      db:
-        condition: service_healthy  # Aguarda o banco estar pronto
+      - db
+    environment:
+      DBT_PROFILE_DIR: /app
     volumes:
       - .:/app
     working_dir: /app
-    entrypoint: ["sh", "-c", "dbt run && tail -f /dev/null"]  # Executa o dbt automaticamente
+    entrypoint: ["tail", "-f", "/dev/null"]
 
-  pgadmin:
+  pgadmin:  # 🔥 Corrigido (agora está dentro de services)
     image: dpage/pgadmin4
     container_name: pgadmin_dbt
     environment:
@@ -36,4 +42,3 @@ services:
 
 volumes:
   postgres_data:
-
