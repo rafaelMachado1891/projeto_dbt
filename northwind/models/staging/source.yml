@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: postgres
+    database: northwind_dbt
+    schema: public
+    tables: 
+
+      - name: customers
+      - name: order_details
+
+      - name: orders
+
+      - name: products
