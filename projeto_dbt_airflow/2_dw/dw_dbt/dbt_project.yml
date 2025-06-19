@@ -1,0 +1,29 @@
+name: 'dw_dbt'
+version: '1.0.0'
+
+profile: 'dw_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+vars:
+    "dbt_date:time_zone": "America/Sao_Paulo"
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  dw_dbt:
+    staging:
+      +materialized: view
+    
+    intermediate:
+      +materialized: table
+    
+    mart:
+      +materialized: table

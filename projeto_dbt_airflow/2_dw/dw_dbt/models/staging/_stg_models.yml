@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_cadastros
+    description: "Modelo staging para a tabela de cadastros de clientes. Contém dados limpos e padronizados dos clientes."
+    columns:
+      - name: id_cliente
+        description: "ID único do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: cpf
+        description: "CPF do cliente (apenas números)"
+        tests:
+          - not_null
+      - name: nome
+        description: "Nome completo do cliente"
+      - name: cidade
+        description: "Cidade do cliente"
+      - name: estado
+        description: "Estado (UF) do cliente"
+      - name: pais
+        description: "País do cliente"
+      - name: dt_cadastro
+        description: "Data de cadastro do cliente no sistema"
+      - name: etl_inserted_at
+        description: "Timestamp de quando o dado foi carregado no modelo"
+
+  - name: stg_pedidos
+    description: "Modelo staging para a tabela de pedidos. Contém dados limpos e transformações iniciais dos pedidos."
+    columns:
+      - name: id_pedido
+        description: "ID único do pedido"
+        tests:
+          - unique
+          - not_null
+      - name: cpf
+        description: "CPF do cliente que fez o pedido"
+        tests:
+          - not_null
+      - name: valor_pedido
+        description: "Valor dos itens do pedido (sem frete e desconto)"
+      - name: dt_pedido
+        description: "Data em que o pedido foi realizado"
+        tests:
+          - not_null
+      - name: etl_inserted_at
+        description: "Timestamp de quando o dado foi carregado no modelo"

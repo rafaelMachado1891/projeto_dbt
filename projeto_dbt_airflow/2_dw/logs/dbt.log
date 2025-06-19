@@ -1,0 +1,29 @@
+[0m12:05:31.934105 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B308E60A70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B308E61430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B308E63BF0>]}
+
+
+============================== 12:05:31.949767 | 0f793f2b-9304-45e7-b171-5cc67cd9e700 ==============================
+[0m12:05:31.949767 [info ] [MainThread]: Running with dbt=1.10.1
+[0m12:05:31.949767 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': 'C:\\Users\\rafad\\.dbt', 'log_path': 'logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt init', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m12:09:05.967250 [debug] [MainThread]: Starter project path: C:\Users\rafad\Documents\Repositorios_Git\projeto_dbt_airflow\1_setup\.venv\Lib\site-packages\dbt\include\starter_project
+[0m12:09:06.054194 [info ] [MainThread]: 
+Your new dbt project "dw_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:09:06.057192 [info ] [MainThread]: Setting up your profile.
+[0m12:14:18.563541 [info ] [MainThread]: Profile dw_dbt written to C:\Users\rafad\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m12:14:18.569539 [debug] [MainThread]: Command `dbt init` succeeded at 12:14:18.569539 after 526.98 seconds
+[0m12:14:18.574540 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B30A4A8E30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B309300950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B309300050>]}
+[0m12:14:18.576537 [debug] [MainThread]: Flushing usage events
+[0m12:14:19.680646 [debug] [MainThread]: An error was encountered while trying to flush usage events
