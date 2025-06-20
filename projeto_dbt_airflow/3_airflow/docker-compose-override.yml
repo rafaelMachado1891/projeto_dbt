@@ -1,0 +1,7 @@
+services:
+  scheduler:
+    volumes:
+      - ./dbt/data_warehouse_projeto_dbt/dw_dbt:/usr/local/airflow/dbt/dw_dbt
+  dag-processor:
+    volumes:
+      - ./dbt/data_warehouse_projeto_dbt/dw_dbt:/usr/local/airflow/dbt/dw_dbt
