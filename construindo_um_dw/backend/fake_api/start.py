@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from faker import Faker
-import pandas as pd                
-import random
+import pandas as pd
 from pathlib import Path
 
 app = FastAPI()
@@ -16,7 +15,7 @@ df['indice'] = range(1, len(df) + 1)
 df.set_index('indice', inplace=True)
 
 @app.get("/gerar_compra")
-async def gerar_compra():
+async def gerar_compra_unica():
     row = df.sample(1).iloc[0]
     return {
         "client": fake.name(),
@@ -30,10 +29,10 @@ async def gerar_compra():
         }
 
 @app.get("/gerar_compra/{numero_registro}")
-async def gerar_compra(numero_registro: int):
+async def gerar_compra_lote(numero_registro: int):
 
     if numero_registro < 1: 
-        return {"error": "Número de registro deve ser maior que 1"}
+        return {"error": "Numero de registro deve ser maior que 1"}
     
     respostas = []
 
@@ -52,3 +51,4 @@ async def gerar_compra(numero_registro: int):
         respostas.append(compra)
 
     return respostas
+
