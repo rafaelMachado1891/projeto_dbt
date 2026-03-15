@@ -92,7 +92,6 @@ construindo_um_dw/
 |-- README.md
 `-- backend/
     |-- .env_example
-    |-- README.md
     |-- start.py
     |-- aws/
     |   |-- __init__.py
